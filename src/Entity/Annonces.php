@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AnnoncesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AnnoncesRepository::class)]
 class Annonces
@@ -11,12 +12,15 @@ class Annonces
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("read")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("read")]
     private ?string $statut = null;
 
     #[ORM\ManyToOne(inversedBy: 'annonces')]
+    #[Groups("read")]
     private ?Produit $produit = null;
 
     public function getId(): ?int
